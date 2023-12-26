@@ -71,53 +71,63 @@ class _BetterPlayerMaterialControlsState
     //     child: _buildErrorWidget(),
     //   );
     // }
-    return GestureDetector(
-      onTap: () {
-        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-          BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
-        }
-        controlsNotVisible
-            ? cancelAndRestartTimer()
-            : changePlayerControlsNotVisible(true);
-      },
-      onDoubleTap: () {
-        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-          BetterPlayerMultipleGestureDetector.of(context)!.onDoubleTap?.call();
-        }
-        cancelAndRestartTimer();
-      },
-      onLongPress: () {
-        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-          BetterPlayerMultipleGestureDetector.of(context)!.onLongPress?.call();
-        }
-      },
-      child: AbsorbPointer(
-        absorbing: controlsNotVisible,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            if (_wasLoading)
-              Center(child: _buildLoadingWidget())
-            else
-              _buildHitArea(),
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: _buildTopBar(),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        GestureDetector(
+          onTap: () {
+            if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+              BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
+            }
+            controlsNotVisible
+                ? cancelAndRestartTimer()
+                : changePlayerControlsNotVisible(true);
+          },
+          onDoubleTap: () {
+            if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+              BetterPlayerMultipleGestureDetector.of(context)!
+                  .onDoubleTap
+                  ?.call();
+            }
+            cancelAndRestartTimer();
+          },
+          onLongPress: () {
+            if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+              BetterPlayerMultipleGestureDetector.of(context)!
+                  .onLongPress
+                  ?.call();
+            }
+          },
+          child: AbsorbPointer(
+            absorbing: controlsNotVisible,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                if (_wasLoading)
+                  Center(child: _buildLoadingWidget())
+                else
+                  _buildHitArea(),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: _buildTopBar(),
+                ),
+                Positioned(
+                    bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
+                _buildNextVideoWidget(),
+              ],
             ),
-            Positioned(bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
-            _buildNextVideoWidget(),
-            _latestValue?.hasError == true
-                ? Center(
-                    child: Container(
-                    color: Colors.black,
-                    child: _buildErrorWidget(),
-                  ))
-                : SizedBox(),
-          ],
+          ),
         ),
-      ),
+        _latestValue?.hasError == true
+            ? Center(
+                child: Container(
+                color: Colors.black,
+                child: _buildErrorWidget(),
+              ))
+            : SizedBox(),
+      ],
     );
   }
 
