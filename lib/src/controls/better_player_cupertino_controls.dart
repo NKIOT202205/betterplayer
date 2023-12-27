@@ -166,6 +166,7 @@ class _BetterPlayerCupertinoControlsState
     final _oldController = _betterPlayerController;
     _betterPlayerController = BetterPlayerController.of(context);
     _controller = _betterPlayerController!.videoPlayerController;
+    _latestValue = _controller!.value;
 
     if (_oldController != _betterPlayerController) {
       _dispose();
