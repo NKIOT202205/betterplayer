@@ -136,7 +136,7 @@ class _BetterPlayerCupertinoControlsState
                   ? SafeArea(child: controlsColumn)
                   : controlsColumn),
         ),
-        _latestValue?.hasError == true && _betterPlayerController!.showFlag == true
+        _latestValue?.hasError == true
             ? Center(
                 child: Container(
                 color: Colors.black,
@@ -687,15 +687,14 @@ class _BetterPlayerCupertinoControlsState
           _betterPlayerController!.cancelNextVideoTimer();
         }
       } else {
-        if (isFinished) {
-          _betterPlayerController!.seekTo(const Duration());
-        }
-        _betterPlayerController!.play();
-        _betterPlayerController!.cancelNextVideoTimer();
-        if(_betterPlayerController!.isNetworkConnected){
-          setState(() {
-            _betterPlayerController!.showFlag = false;
-          });
+        if (_latestValue?.hasError == true) {
+          _betterPlayerController!.retryDataSource();
+        } else {
+          if (isFinished) {
+            _betterPlayerController!.seekTo(const Duration());
+          }
+          _betterPlayerController!.play();
+          _betterPlayerController!.cancelNextVideoTimer();
         }
       }
     }

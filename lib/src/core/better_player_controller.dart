@@ -207,10 +207,6 @@ class BetterPlayerController {
   ///List of loaded ASMS segments
   final List<String> _asmsSegmentsLoaded = [];
 
-  bool _isNetworkConnected = true;
-  bool get isNetworkConnected => _isNetworkConnected;
-  bool showFlag = true;
-
   ///Currently displayed [BetterPlayerSubtitle].
   BetterPlayerSubtitle? renderedSubtitle;
 
@@ -768,7 +764,6 @@ class BetterPlayerController {
             VideoPlayerValue(duration: const Duration());
 
     if (currentVideoPlayerValue.hasError) {
-      showFlag = true;
       _videoPlayerValueOnError ??= currentVideoPlayerValue;
       _postEvent(
         BetterPlayerEvent(
@@ -1048,10 +1043,6 @@ class BetterPlayerController {
   ///Setup overridden fit.
   void setOverriddenFit(BoxFit fit) {
     _overriddenFit = fit;
-  }
-
-  void setNetworkState(bool isConnected) {
-    _isNetworkConnected = isConnected;
   }
 
   ///Get fit used in current video. If fit is null, then fit from

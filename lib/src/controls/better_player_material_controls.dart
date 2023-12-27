@@ -676,11 +676,15 @@ class _BetterPlayerMaterialControlsState
 
       if (!_controller!.value.initialized) {
       } else {
-        if (isFinished) {
-          _betterPlayerController!.seekTo(const Duration());
+        if (_latestValue?.hasError == true) {
+          _betterPlayerController!.retryDataSource();
+        } else {
+          if (isFinished) {
+            _betterPlayerController!.seekTo(const Duration());
+          }
+          _betterPlayerController!.play();
+          _betterPlayerController!.cancelNextVideoTimer();
         }
-        _betterPlayerController!.play();
-        _betterPlayerController!.cancelNextVideoTimer();
       }
     }
   }
