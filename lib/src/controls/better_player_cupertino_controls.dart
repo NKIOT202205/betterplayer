@@ -38,7 +38,6 @@ class _BetterPlayerCupertinoControlsState
   Timer? _expandCollapseTimer;
   Timer? _initTimer;
   bool _wasLoading = false;
-  bool _showFlag = true;
 
   VideoPlayerController? _controller;
   BetterPlayerController? _betterPlayerController;
@@ -137,7 +136,7 @@ class _BetterPlayerCupertinoControlsState
                   ? SafeArea(child: controlsColumn)
                   : controlsColumn),
         ),
-        _latestValue?.hasError == true && _showFlag
+        _latestValue?.hasError == true && _betterPlayerController!.showFlag == true
             ? Center(
                 child: Container(
                 color: Colors.black,
@@ -695,9 +694,8 @@ class _BetterPlayerCupertinoControlsState
         _betterPlayerController!.cancelNextVideoTimer();
         if(_betterPlayerController!.isNetworkConnected){
           setState(() {
-            _showFlag = false;
+            _betterPlayerController!.showFlag = false;
           });
-          _showFlag = true;
         }
       }
     }

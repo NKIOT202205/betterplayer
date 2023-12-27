@@ -209,6 +209,7 @@ class BetterPlayerController {
 
   bool _isNetworkConnected = true;
   bool get isNetworkConnected => _isNetworkConnected;
+  bool showFlag = true;
 
   ///Currently displayed [BetterPlayerSubtitle].
   BetterPlayerSubtitle? renderedSubtitle;
@@ -767,6 +768,7 @@ class BetterPlayerController {
             VideoPlayerValue(duration: const Duration());
 
     if (currentVideoPlayerValue.hasError) {
+      showFlag = true;
       _videoPlayerValueOnError ??= currentVideoPlayerValue;
       _postEvent(
         BetterPlayerEvent(
