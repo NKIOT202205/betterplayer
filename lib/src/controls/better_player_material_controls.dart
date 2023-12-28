@@ -88,6 +88,7 @@ class _BetterPlayerMaterialControlsState
                   ?.call();
             }
             cancelAndRestartTimer();
+            _onPlayPause();
           },
           onLongPress: () {
             if (BetterPlayerMultipleGestureDetector.of(context) != null) {
