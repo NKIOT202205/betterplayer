@@ -64,13 +64,11 @@ class _BetterPlayerMaterialControlsState
 
   ///Builds main widget of the controls.
   Widget _buildMainWidget() {
+    _betterPlayerController = BetterPlayerController.of(context);
     _wasLoading = isLoading(_latestValue);
-    // if (_latestValue?.hasError == true) {
-    //   return Container(
-    //     color: Colors.black,
-    //     child: _buildErrorWidget(),
-    //   );
-    // }
+    if (_latestValue?.hasError == true) {
+      _betterPlayerController!.pause();
+    }
     return Stack(
       fit: StackFit.expand,
       children: [

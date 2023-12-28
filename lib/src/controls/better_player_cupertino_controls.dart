@@ -64,15 +64,6 @@ class _BetterPlayerCupertinoControlsState
   ///Builds main widget of the controls.
   Widget _buildMainWidget() {
     _betterPlayerController = BetterPlayerController.of(context);
-
-    // if (_latestValue?.hasError == true) {
-    //   return Container(
-    //     color: Colors.black,
-    //     child: _buildErrorWidget(),
-    //   );
-    // }
-
-    _betterPlayerController = BetterPlayerController.of(context);
     _controller = _betterPlayerController!.videoPlayerController;
     final backgroundColor = _controlsConfiguration.controlBarColor;
     final iconColor = _controlsConfiguration.iconsColor;
@@ -82,8 +73,10 @@ class _BetterPlayerCupertinoControlsState
         : _controlsConfiguration.controlBarHeight + 10;
     const buttonPadding = 10.0;
     final isFullScreen = _betterPlayerController?.isFullScreen == true;
-
     _wasLoading = isLoading(_latestValue);
+    if (_latestValue?.hasError == true) {
+      _betterPlayerController!.pause();
+    }
     final controlsColumn = Column(children: <Widget>[
       _buildTopBar(
         backgroundColor,
