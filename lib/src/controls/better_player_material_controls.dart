@@ -67,66 +67,63 @@ class _BetterPlayerMaterialControlsState
     _betterPlayerController = BetterPlayerController.of(context);
     _wasLoading = isLoading(_latestValue);
     if (_latestValue?.hasError == true) {
-      _betterPlayerController!.pause();
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _betterPlayerController!.pause();
+      });
     }
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        GestureDetector(
-          onTap: () {
-            if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-              BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
-            }
-            controlsNotVisible
-                ? cancelAndRestartTimer()
-                : changePlayerControlsNotVisible(true);
-          },
-          onDoubleTap: () {
-            if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-              BetterPlayerMultipleGestureDetector.of(context)!
-                  .onDoubleTap
-                  ?.call();
-            }
-            cancelAndRestartTimer();
-            _onPlayPause();
-          },
-          onLongPress: () {
-            if (BetterPlayerMultipleGestureDetector.of(context) != null) {
-              BetterPlayerMultipleGestureDetector.of(context)!
-                  .onLongPress
-                  ?.call();
-            }
-          },
-          child: AbsorbPointer(
-            absorbing: controlsNotVisible,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                if (_wasLoading)
-                  Center(child: _buildLoadingWidget())
-                else
-                  _buildHitArea(),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: _buildTopBar(),
-                ),
-                Positioned(
-                    bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
-                _buildNextVideoWidget(),
-              ],
+    return GestureDetector(
+      onTap: () {
+        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+          BetterPlayerMultipleGestureDetector.of(context)!.onTap?.call();
+        }
+        controlsNotVisible
+            ? cancelAndRestartTimer()
+            : changePlayerControlsNotVisible(true);
+      },
+      onDoubleTap: () {
+        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+          BetterPlayerMultipleGestureDetector.of(context)!
+              .onDoubleTap
+              ?.call();
+        }
+        cancelAndRestartTimer();
+        _onPlayPause();
+      },
+      onLongPress: () {
+        if (BetterPlayerMultipleGestureDetector.of(context) != null) {
+          BetterPlayerMultipleGestureDetector.of(context)!
+              .onLongPress
+              ?.call();
+        }
+      },
+      child: AbsorbPointer(
+        absorbing: _latestValue?.hasError == true ? false : controlsNotVisible,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (_wasLoading)
+              Center(child: _buildLoadingWidget())
+            else
+              _buildHitArea(),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: _buildTopBar(),
             ),
-          ),
-        ),
-        _latestValue?.hasError == true
-            ? Center(
+            Positioned(
+                bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
+            _buildNextVideoWidget(),
+            _latestValue?.hasError == true
+                ? Center(
                 child: Container(
-                color: Colors.black,
-                child: _buildErrorWidget(),
-              ))
-            : SizedBox(),
-      ],
+                  color: Colors.black,
+                  child: _buildErrorWidget(),
+                ))
+                : SizedBox(),
+          ],
+        ),
+      ),
     );
   }
 
