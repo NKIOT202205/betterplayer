@@ -101,6 +101,13 @@ class _BetterPlayerMaterialControlsState
         child: Stack(
           fit: StackFit.expand,
           children: [
+            _latestValue?.hasError == true
+                ? Center(
+                child: Container(
+                  color: Colors.black,
+                  child: _buildErrorWidget(),
+                ))
+                : SizedBox(),
             if (_wasLoading)
               Center(child: _buildLoadingWidget())
             else
@@ -114,13 +121,6 @@ class _BetterPlayerMaterialControlsState
             Positioned(
                 bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
             _buildNextVideoWidget(),
-            _latestValue?.hasError == true
-                ? Center(
-                child: Container(
-                  color: Colors.black,
-                  child: _buildErrorWidget(),
-                ))
-                : SizedBox(),
           ],
         ),
       ),
