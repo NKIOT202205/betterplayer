@@ -127,6 +127,9 @@ class _BetterPlayerCupertinoControlsState
           child: Stack(
             fit: StackFit.expand,
             children: [
+              isFullScreen
+                  ? SafeArea(child: controlsColumn)
+                  : controlsColumn,
               _latestValue?.hasError == true
                   ? Center(
                   child: Container(
@@ -134,9 +137,6 @@ class _BetterPlayerCupertinoControlsState
                     child: _buildErrorWidget(),
                   ))
                   : SizedBox(),
-              isFullScreen
-                  ? SafeArea(child: controlsColumn)
-                  : controlsColumn,
             ],
           ),
       ),
