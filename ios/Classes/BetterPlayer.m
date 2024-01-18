@@ -285,7 +285,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
         [self play];
     } else {
         _stalledCount++;
-        if (_stalledCount > 6){
+        if (_stalledCount > 10){
             if (_eventSink != nil) {
                 _eventSink([FlutterError
                         errorWithCode:@"VideoError"
