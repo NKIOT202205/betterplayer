@@ -439,7 +439,8 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
         if (!_player.currentItem) {
             return;
         }
-        if (_player.status != AVPlayerStatusReadyToPlay) {
+        // refer https://github.com/AnonymHK/betterplayer/issues/28
+        if (_player.currentItem.status != AVPlayerItemStatusReadyToPlay || _player.status != AVPlayerStatusReadyToPlay) {
             return;
         }
 
