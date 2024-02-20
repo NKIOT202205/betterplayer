@@ -75,7 +75,7 @@ class _BetterPlayerCupertinoControlsState
     final isFullScreen = _betterPlayerController?.isFullScreen == true;
     _wasLoading = isLoading(_latestValue);
     _betterPlayerController?.isLoading = _wasLoading;
-    if (_latestValue?.hasError == true || (_wasLoading && _betterPlayerController?.hasNet == false)) {
+    if (_latestValue?.hasError == true) {
       Future.delayed(const Duration(milliseconds: 100), () {
         _betterPlayerController!.pause();
       });
