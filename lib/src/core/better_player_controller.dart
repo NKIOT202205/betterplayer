@@ -22,6 +22,10 @@ class BetterPlayerController {
   static const String _dataSourceParameter = "dataSource";
   static const String _authorizationHeader = "Authorization";
 
+  /// 24/02/20 wangcong
+  /// 判断video是不是在loading中
+  bool isLoading = false;
+
   ///General configuration used in controller instance.
   final BetterPlayerConfiguration betterPlayerConfiguration;
 

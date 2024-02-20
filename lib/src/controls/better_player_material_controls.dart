@@ -66,6 +66,7 @@ class _BetterPlayerMaterialControlsState
   Widget _buildMainWidget() {
     _betterPlayerController = BetterPlayerController.of(context);
     _wasLoading = isLoading(_latestValue);
+    _betterPlayerController?.isLoading = _wasLoading;
     if (_latestValue?.hasError == true) {
       Future.delayed(const Duration(milliseconds: 100), () {
         _betterPlayerController!.pause();

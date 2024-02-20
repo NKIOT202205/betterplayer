@@ -74,6 +74,7 @@ class _BetterPlayerCupertinoControlsState
     const buttonPadding = 10.0;
     final isFullScreen = _betterPlayerController?.isFullScreen == true;
     _wasLoading = isLoading(_latestValue);
+    _betterPlayerController?.isLoading = _wasLoading;
     if (_latestValue?.hasError == true) {
       Future.delayed(const Duration(milliseconds: 100), () {
         _betterPlayerController!.pause();
