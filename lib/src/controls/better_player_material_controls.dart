@@ -67,7 +67,7 @@ class _BetterPlayerMaterialControlsState
     _betterPlayerController = BetterPlayerController.of(context);
     _wasLoading = isLoading(_latestValue);
     _betterPlayerController?.isLoading = _wasLoading;
-    if (_latestValue?.hasError == true) {
+    if (_latestValue?.hasError == true || (_wasLoading && _betterPlayerController?.hasNet == false)) {
       Future.delayed(const Duration(milliseconds: 100), () {
         _betterPlayerController!.pause();
       });
