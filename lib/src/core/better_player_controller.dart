@@ -26,6 +26,10 @@ class BetterPlayerController {
   /// 判断video是不是在loading中
   bool isLoading = false;
 
+  /// 24/02/20 wangcong
+  /// 外部传入的网络状态flag
+  bool hasNet = true;
+
   ///General configuration used in controller instance.
   final BetterPlayerConfiguration betterPlayerConfiguration;
 

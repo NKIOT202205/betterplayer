@@ -131,7 +131,7 @@ class _BetterPlayerCupertinoControlsState
               isFullScreen
                   ? SafeArea(child: controlsColumn)
                   : controlsColumn,
-              _latestValue?.hasError == true
+              _latestValue?.hasError == true || (_wasLoading && _betterPlayerController?.hasNet == false)
                   ? Center(
                   child: Container(
                     color: Colors.black,

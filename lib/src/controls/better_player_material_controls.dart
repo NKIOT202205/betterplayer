@@ -115,7 +115,7 @@ class _BetterPlayerMaterialControlsState
             Positioned(
                 bottom: 0, left: 0, right: 0, child: _buildBottomBar()),
             _buildNextVideoWidget(),
-            _latestValue?.hasError == true
+            _latestValue?.hasError == true || (_wasLoading && _betterPlayerController?.hasNet == false)
                 ? Center(
                 child: Container(
                   color: Colors.black,
