@@ -362,10 +362,10 @@ class _BetterPlayerCupertinoControlsState
         cancelAndRestartTimer();
 
         if (_latestValue!.volume == 0) {
-          controller!.setVolume(_latestVolume ?? 0.5);
+          _betterPlayerController!.setVolume(_latestVolume ?? 0.5);
         } else {
           _latestVolume = controller!.value.volume;
-          controller.setVolume(0.0);
+          _betterPlayerController!.setVolume(0.0);
         }
       },
       child: AnimatedOpacity(
